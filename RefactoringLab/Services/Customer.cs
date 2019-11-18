@@ -32,7 +32,7 @@ namespace RefactoringLab.Services
             {
                 double thisAmount = 0;
 
-                thisAmount = each.AmountForRental();
+                thisAmount = each.GetCharge();
 
                 // add frequent renter points
                 frequentRenterPoints++;

@@ -26,7 +26,7 @@
         /// 因為上述原因，所以將此方法推至 Rental 類別中
         /// </summary>
         /// <returns></returns>
-        public double AmountForRental()
+        public double GetCharge()
         {
             // 變更變數為 result，表示在這個方法內計算的結果
             double result = 0;
