@@ -32,7 +32,7 @@ namespace RefactoringLab.Services
             {
                 double thisAmount = 0;
 
-                thisAmount = AmountForRental(each);
+                thisAmount = each.AmountForRental();
 
                 // add frequent renter points
                 frequentRenterPoints++;
@@ -48,32 +48,6 @@ namespace RefactoringLab.Services
             // add footer lines
             result += "Amount owed is " + totalAmount.ToString() + "\n";
             result += "You earned " + frequentRenterPoints.ToString() + " frequent renter points";
-
-            return result;
-        }
-
-        // 抽取出此 Method，原因是因為 Method 內部並沒有使用到其他類別的內容 (除了 Movie 之外)，且 thisAmount 為區域變數
-        public double AmountForRental(Rental rental)
-        {
-            // 變更變數為 result，表示在這個方法內計算的結果
-            double result = 0;
-            // determine amounts for rental line
-            switch (rental.GetMovie().GetPriceCode())
-            {
-                case Movie.Regular:
-                    result += 2;
-                    if (rental.GetDaysRented() > 2)
-                        result += (rental.GetDaysRented() - 2) * 1.5;
-                    break;
-                case Movie.NewRelease:
-                    result += rental.GetDaysRented() * 3;
-                    break;
-                case Movie.Children:
-                    result += 1.5;
-                    if (rental.GetDaysRented() > 3)
-                        result += (rental.GetDaysRented() - 3) * 1.5;
-                    break;
-            }
 
             return result;
         }
