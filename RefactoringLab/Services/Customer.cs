@@ -24,35 +24,44 @@ namespace RefactoringLab.Services
 
         public string Statement()
         {
-            double totalAmount = 0;
-            var frequentRenterPoints = 0;
             var result = "Rental Record for " + GetName() + "\n";
 
             foreach (var each in _rentals)
             {
-                frequentRenterPoints += GetFrequentRenterPoints(each);
-
                 // show figures for this rental
                 result += "\t" + each.GetMovie().GetTitle() + "\t" + each.GetCharge().ToString() + "\n";
-                totalAmount += each.GetCharge();
             }
 
             // add footer lines
-            result += "Amount owed is " + totalAmount.ToString() + "\n";
-            result += "You earned " + frequentRenterPoints.ToString() + " frequent renter points";
+            result += "Amount owed is " + GetTotalAmount() + "\n";
+            result += "You earned " + GetTotalFrequentRenterPoints() + " frequent renter points";
 
             return result;
         }
 
-        public int GetFrequentRenterPoints(Rental each)
+        public string GetTotalFrequentRenterPoints()
         {
             int frequentRenterPoints = 0;
-            // add frequent renter points
-            frequentRenterPoints++;
-            // add bonus for a two day new release rental
-            if ((each.GetMovie().GetPriceCode() == Movie.NewRelease) && each.GetDaysRented() > 1)
-                frequentRenterPoints++;
-            return frequentRenterPoints;
+
+            foreach (var each in _rentals)
+            {
+                frequentRenterPoints += each.GetFrequentRenterPoints();
+            }
+
+            return frequentRenterPoints.ToString();
+        }
+
+
+        public string GetTotalAmount()
+        {
+            double result = 0;
+
+            foreach (var each in _rentals)
+            {
+                result += each.GetCharge();
+            }
+
+            return result.ToString();
         }
     }
 }

@@ -50,5 +50,16 @@
 
             return result;
         }
+
+        public int GetFrequentRenterPoints()
+        {
+            int frequentRenterPoints = 0;
+            // add frequent renter points
+            frequentRenterPoints++;
+            // add bonus for a two day new release rental
+            if ((this.GetMovie().GetPriceCode() == Movie.NewRelease) && this.GetDaysRented() > 1)
+                frequentRenterPoints++;
+            return frequentRenterPoints;
+        }
     }
 }
