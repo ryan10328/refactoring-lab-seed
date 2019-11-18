@@ -6,10 +6,6 @@ namespace RefactoringLab.Services
 {
     public class Movie
     {
-        public const int Children = 2;
-        public const int NewRelease = 1;
-        public const int Regular = 0;
-
         private readonly string _title;
 
         public Movie(string title, int priceCode)
@@ -27,15 +23,17 @@ namespace RefactoringLab.Services
 
         public void SetPriceCode(int priceCode)
         {
-            switch (priceCode)
+            var code = (PriceCode) priceCode;
+
+            switch (code)
             {
-                case Regular:
+                case PriceCode.Regular:
                     Price = new RegularPrice();
                     break;
-                case NewRelease:
+                case PriceCode.NewRelease:
                     Price = new NewReleasePrice();
                     break;
-                case Children:
+                case PriceCode.Children:
                     Price = new ChildrenPrice();
                     break;
                 default:
@@ -53,7 +51,7 @@ namespace RefactoringLab.Services
             // add frequent renter points
             frequentRenterPoints++;
             // add bonus for a two day new release rental
-            if ((GetPriceCode() == Movie.NewRelease) && daysRented > 1)
+            if ((GetPriceCode() == (int)PriceCode.NewRelease) && daysRented > 1)
                 frequentRenterPoints++;
             return frequentRenterPoints;
         }
