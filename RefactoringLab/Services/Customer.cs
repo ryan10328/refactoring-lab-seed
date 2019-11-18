@@ -29,7 +29,7 @@ namespace RefactoringLab.Services
             foreach (var each in _rentals)
             {
                 // show figures for this rental
-                result += "\t" + each.GetMovie().GetTitle() + "\t" + each.Movie.GetCharge(each.GetDaysRented()).ToString() + "\n";
+                result += "\t" + each.GetMovie().GetTitle() + "\t" + each.GetMovie().GetCharge(each.GetDaysRented()).ToString() + "\n";
             }
 
             // add footer lines
@@ -45,7 +45,7 @@ namespace RefactoringLab.Services
 
             foreach (var each in _rentals)
             {
-                frequentRenterPoints += each.Movie.GetFrequentRenterPoints(each.GetDaysRented());
+                frequentRenterPoints += each.GetMovie().GetFrequentRenterPoints(each.GetDaysRented());
             }
 
             return frequentRenterPoints.ToString();
@@ -58,7 +58,7 @@ namespace RefactoringLab.Services
 
             foreach (var each in _rentals)
             {
-                result += each.Movie.GetCharge(each.GetDaysRented());
+                result += each.GetMovie().GetCharge(each.GetDaysRented());
             }
 
             return result.ToString();

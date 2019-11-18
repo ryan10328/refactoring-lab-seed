@@ -11,11 +11,6 @@
             _daysRented = daysRented;
         }
 
-        public Movie Movie
-        {
-            get { return _movie; }
-        }
-
         public int GetDaysRented()
         {
             return _daysRented;
