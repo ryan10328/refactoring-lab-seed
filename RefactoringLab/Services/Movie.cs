@@ -63,5 +63,16 @@ namespace RefactoringLab.Services
 
             return result;
         }
+
+        public int GetFrequentRenterPoints(int daysRented)
+        {
+            int frequentRenterPoints = 0;
+            // add frequent renter points
+            frequentRenterPoints++;
+            // add bonus for a two day new release rental
+            if ((GetPriceCode() == Movie.NewRelease) && daysRented > 1)
+                frequentRenterPoints++;
+            return frequentRenterPoints;
+        }
     }
 }

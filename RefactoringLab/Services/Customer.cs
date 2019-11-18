@@ -45,7 +45,7 @@ namespace RefactoringLab.Services
 
             foreach (var each in _rentals)
             {
-                frequentRenterPoints += each.GetFrequentRenterPoints();
+                frequentRenterPoints += each.Movie.GetFrequentRenterPoints(each.GetDaysRented());
             }
 
             return frequentRenterPoints.ToString();
