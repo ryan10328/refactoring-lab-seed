@@ -17,7 +17,7 @@ namespace RefactoringLabTest
         public void TestAddRental()
         {
             var customer2 = new CustomerBuilder().WithName("Julia").Build();
-            var movie1 = new Movie("Gone with the Wind", Movie.Regular);
+            var movie1 = new Movie("Gone with the Wind", (int)PriceCode.Regular);
             var rental1 = new Rental(movie1, 3); // 3 day rental
             customer2.AddRental(rental1);
         }
@@ -31,7 +31,7 @@ namespace RefactoringLabTest
         [TestMethod]
         public void StatementForRegularMovie()
         {
-            var movie1 = new Movie("Gone with the Wind", Movie.Regular);
+            var movie1 = new Movie("Gone with the Wind", (int)PriceCode.Regular);
             var rental1 = new Rental(movie1, 3); // 3 day rental
             var customer2 =
                     new CustomerBuilder()
@@ -49,7 +49,7 @@ namespace RefactoringLabTest
         [TestMethod]
         public void StatementForNewReleaseMovie()
         {
-            var movie1 = new Movie("Star Wars", Movie.NewRelease);
+            var movie1 = new Movie("Star Wars", (int)PriceCode.NewRelease);
             var rental1 = new Rental(movie1, 3); // 3 day rental
             Customer customer2 =
                     new CustomerBuilder()
@@ -67,7 +67,7 @@ namespace RefactoringLabTest
         [TestMethod]
         public void StatementForChildrensMovie()
         {
-            var movie1 = new Movie("Madagascar", Movie.Children);
+            var movie1 = new Movie("Madagascar", (int)PriceCode.Children);
             var rental1 = new Rental(movie1, 3); // 3 day rental
             var customer2
                     = new CustomerBuilder()
@@ -85,11 +85,11 @@ namespace RefactoringLabTest
         [TestMethod]
         public void StatementForManyMovies()
         {
-            var movie1 = new Movie("Madagascar", Movie.Children);
+            var movie1 = new Movie("Madagascar", (int)PriceCode.Children);
             var rental1 = new Rental(movie1, 6); // 6 day rental
-            var movie2 = new Movie("Star Wars", Movie.NewRelease);
+            var movie2 = new Movie("Star Wars", (int)PriceCode.NewRelease);
             var rental2 = new Rental(movie2, 2); // 2 day rental
-            var movie3 = new Movie("Gone with the Wind", Movie.Regular);
+            var movie3 = new Movie("Gone with the Wind", (int)PriceCode.Regular);
             var rental3 = new Rental(movie3, 8); // 8 day rental
             var customer1
                     = new CustomerBuilder()
