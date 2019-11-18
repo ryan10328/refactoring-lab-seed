@@ -53,28 +53,29 @@ namespace RefactoringLab.Services
         }
 
         // 抽取出此 Method，原因是因為 Method 內部並沒有使用到其他類別的內容 (除了 Movie 之外)，且 thisAmount 為區域變數
-        public double AmountForRental(Rental each)
+        public double AmountForRental(Rental rental)
         {
-            double thisAmount = 0;
-            // determine amounts for each line
-            switch (each.GetMovie().GetPriceCode())
+            // 變更變數為 result，表示在這個方法內計算的結果
+            double result = 0;
+            // determine amounts for rental line
+            switch (rental.GetMovie().GetPriceCode())
             {
                 case Movie.Regular:
-                    thisAmount += 2;
-                    if (each.GetDaysRented() > 2)
-                        thisAmount += (each.GetDaysRented() - 2) * 1.5;
+                    result += 2;
+                    if (rental.GetDaysRented() > 2)
+                        result += (rental.GetDaysRented() - 2) * 1.5;
                     break;
                 case Movie.NewRelease:
-                    thisAmount += each.GetDaysRented() * 3;
+                    result += rental.GetDaysRented() * 3;
                     break;
                 case Movie.Children:
-                    thisAmount += 1.5;
-                    if (each.GetDaysRented() > 3)
-                        thisAmount += (each.GetDaysRented() - 3) * 1.5;
+                    result += 1.5;
+                    if (rental.GetDaysRented() > 3)
+                        result += (rental.GetDaysRented() - 3) * 1.5;
                     break;
             }
 
-            return thisAmount;
+            return result;
         }
     }
 }
