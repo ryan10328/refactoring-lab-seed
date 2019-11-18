@@ -32,23 +32,7 @@ namespace RefactoringLab.Services
             {
                 double thisAmount = 0;
 
-                //determine amounts for each line
-                switch (each.GetMovie().GetPriceCode())
-                {
-                    case Movie.Regular:
-                        thisAmount += 2;
-                        if (each.GetDaysRented() > 2)
-                            thisAmount += (each.GetDaysRented() - 2) * 1.5;
-                        break;
-                    case Movie.NewRelease:
-                        thisAmount += each.GetDaysRented() * 3;
-                        break;
-                    case Movie.Children:
-                        thisAmount += 1.5;
-                        if (each.GetDaysRented() > 3)
-                            thisAmount += (each.GetDaysRented() - 3) * 1.5;
-                        break;
-                }
+                thisAmount = AmountForRental(each);
 
                 // add frequent renter points
                 frequentRenterPoints++;
@@ -66,6 +50,31 @@ namespace RefactoringLab.Services
             result += "You earned " + frequentRenterPoints.ToString() + " frequent renter points";
 
             return result;
+        }
+
+        // 抽取出此 Method，原因是因為 Method 內部並沒有使用到其他類別的內容 (除了 Movie 之外)，且 thisAmount 為區域變數
+        public double AmountForRental(Rental each)
+        {
+            double thisAmount = 0;
+            // determine amounts for each line
+            switch (each.GetMovie().GetPriceCode())
+            {
+                case Movie.Regular:
+                    thisAmount += 2;
+                    if (each.GetDaysRented() > 2)
+                        thisAmount += (each.GetDaysRented() - 2) * 1.5;
+                    break;
+                case Movie.NewRelease:
+                    thisAmount += each.GetDaysRented() * 3;
+                    break;
+                case Movie.Children:
+                    thisAmount += 1.5;
+                    if (each.GetDaysRented() > 3)
+                        thisAmount += (each.GetDaysRented() - 3) * 1.5;
+                    break;
+            }
+
+            return thisAmount;
         }
     }
 }
