@@ -30,9 +30,7 @@ namespace RefactoringLab.Services
 
             foreach (var each in _rentals)
             {
-                double thisAmount = 0;
-
-                thisAmount = each.GetCharge();
+                // 消除這個多餘的變數，可以直接用 each.GetCharge() 來代替即可
 
                 // add frequent renter points
                 frequentRenterPoints++;
@@ -41,8 +39,8 @@ namespace RefactoringLab.Services
                     frequentRenterPoints++;
 
                 // show figures for this rental
-                result += "\t" + each.GetMovie().GetTitle() + "\t" + thisAmount.ToString() + "\n";
-                totalAmount += thisAmount;
+                result += "\t" + each.GetMovie().GetTitle() + "\t" + each.GetCharge().ToString() + "\n";
+                totalAmount += each.GetCharge();
             }
 
             // add footer lines
