@@ -30,13 +30,7 @@ namespace RefactoringLab.Services
 
             foreach (var each in _rentals)
             {
-                // 消除這個多餘的變數，可以直接用 each.GetCharge() 來代替即可
-
-                // add frequent renter points
-                frequentRenterPoints++;
-                // add bonus for a two day new release rental
-                if ((each.GetMovie().GetPriceCode() == Movie.NewRelease) && each.GetDaysRented() > 1)
-                    frequentRenterPoints++;
+                frequentRenterPoints += GetFrequentRenterPoints(each);
 
                 // show figures for this rental
                 result += "\t" + each.GetMovie().GetTitle() + "\t" + each.GetCharge().ToString() + "\n";
@@ -48,6 +42,17 @@ namespace RefactoringLab.Services
             result += "You earned " + frequentRenterPoints.ToString() + " frequent renter points";
 
             return result;
+        }
+
+        public int GetFrequentRenterPoints(Rental each)
+        {
+            int frequentRenterPoints = 0;
+            // add frequent renter points
+            frequentRenterPoints++;
+            // add bonus for a two day new release rental
+            if ((each.GetMovie().GetPriceCode() == Movie.NewRelease) && each.GetDaysRented() > 1)
+                frequentRenterPoints++;
+            return frequentRenterPoints;
         }
     }
 }
