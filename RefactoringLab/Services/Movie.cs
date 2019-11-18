@@ -3,6 +3,36 @@ using System.Text;
 
 namespace RefactoringLab.Services
 {
+    public abstract class PriceBase
+    {
+        public abstract int GetPriceCode();
+    }
+
+    public class ChildrenPrice : PriceBase
+    {
+        public override int GetPriceCode()
+        {
+            return Movie.Children;
+        }
+    }
+
+    public class NewReleasePrice : PriceBase
+    {
+        public override int GetPriceCode()
+        {
+            return Movie.NewRelease;
+        }
+    }
+    public class RegularPrice : PriceBase
+    {
+        public override int GetPriceCode()
+        {
+            return Movie.Regular;
+        }
+    }
+
+
+
     public class Movie
     {
         public const int Children = 2;
@@ -15,7 +45,7 @@ namespace RefactoringLab.Services
         public Movie(string title, int priceCode)
         {
             _title = title;
-            _priceCode = priceCode;
+            SetPriceCode(priceCode);
         }
 
         public int GetPriceCode()
@@ -23,9 +53,9 @@ namespace RefactoringLab.Services
             return _priceCode;
         }
 
-        public void SetPriceCode(int arg)
+        public void SetPriceCode(int priceCode)
         {
-            _priceCode = arg;
+            _priceCode = priceCode;
         }
         public string GetTitle()
         {
