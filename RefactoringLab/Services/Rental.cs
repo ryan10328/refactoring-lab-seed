@@ -14,7 +14,7 @@
 
         public double GetCharge()
         {
-            return Movie.GetCharge(_daysRented);
+            return Movie.Price.GetCharge(_daysRented);
         }
 
         public int GetFrequentRenterPoints()
